@@ -17,7 +17,7 @@ This repository contains a simple Single Page Application (SPA) example demonstr
 1.  **Clone the repository:**
 
     ```bash
-    git clone [https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git](https://www.google.com/search?q=https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git)  # Replace with your repo URL
+    git clone [https://github.com/next-reason/ni-spa-js.git]
     cd YOUR_REPO_NAME
     ```
 
