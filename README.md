@@ -1,153 +1,75 @@
-# Next Identity SPA SDK
+# Next Identity SPA Example
 
-## Overview
-The Next Identity SPA SDK provides an easy way to integrate OpenID Connect (OIDC)-compliant authentication into your Single Page Applications (SPA). It supports login, logout, and fetching user information.
+This repository contains a simple Single Page Application (SPA) example demonstrating authentication with Next Identity using the OIDC protocol.  It's designed to be a basic starting point and should be adapted to your specific needs.
+
+## Features
+
+*   Login with Next Identity
+*   Retrieves and displays user profile information
+*   Logout functionality
+*   Uses separate configuration file for client ID, issuer URL, and redirect URI.
+*   Basic styling.
+*   Runs locally using `serve`.
+*   Includes a `state` parameter for security.
 
 ## Installation
 
-### 1. Include the SDK via CDN
-Add the following script tag to your application:
+1.  **Clone the repository:**
 
-```html
-<script src="https://your-cdn-url.com/next-identity-client.js"></script>
-```
+    ```bash
+    git clone [https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git](https://www.google.com/search?q=https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git)  # Replace with your repo URL
+    cd YOUR_REPO_NAME
+    ```
 
-### 2. Configure the SDK
-Create a configuration object to specify your client ID and issuer:
+2.  **Install `serve` globally (if you don't have it already):**
 
-```html
-<script>
-  const NEXT_IDENTITY_CONFIG = {
-    clientId: "your-client-id",
-    issuer: "your-next-identity-issuer",
-    redirectUri: window.location.origin,
-  };
-</script>
-```
+    ```bash
+    npm install -g serve
+    ```
 
-### 3. Initialize the SDK
+## Configuration
 
-```html
-<script>
-  const client = new NextIdentityClient(NEXT_IDENTITY_CONFIG);
-</script>
-```
+1.  **Edit `config.js`:**  This file contains the essential configuration for your Next Identity integration.  **You MUST replace the placeholder values with your actual Next Identity credentials.**
+
+    ```javascript
+    const config = {
+        clientId: 'YOUR_NEXT_IDENTITY_CLIENT_ID', // Replace with your client ID
+        issuer: 'YOUR_NEXT_IDENTITY_ISSUER_URL', // Replace with your issuer URL (e.g., [https://your-next-identity-provider.com](https://your-next-identity-provider.com))
+        redirectUri: window.location.origin + '/callback', // Important: Add a callback route. Make sure this is registered in your Next Identity console.
+        scopes: ['openid', 'profile', 'email'], // Add the scopes you need
+    };
+    ```
+
+    *   **`clientId`:** Your Next Identity application's client ID.
+    *   **`issuer`:** The URL of your Next Identity provider's issuer.
+    *   **`redirectUri`:** The URL where Next Identity will redirect the user after authentication. This *must* match a registered redirect URI in your Next Identity application settings.  The example uses `window.location.origin + '/callback'`, which assumes your app will be served from the root of a domain and that you'll handle a `/callback` route.  Adjust as needed for your setup.
+    *   **`scopes`:**  The OIDC scopes you are requesting (e.g., `openid`, `profile`, `email`).
 
 ## Usage
 
-### Login
-To trigger the login flow, call the `login()` method:
+1.  **Start the local server:**
 
-```html
-<button id="loginButton">Login with Next Identity</button>
+    ```bash
+    serve -s .
+    ```
 
-<script>
-  document.getElementById('loginButton').addEventListener('click', () => client.login());
-</script>
-```
+2.  **Open the application in your browser:**  `serve` will provide you with a URL (usually `http://localhost:5000`).
 
-### Handle Redirect Callback
-After a successful login, Next Identity redirects users back to your application. You need to handle this:
+3.  **Log in:** Click the "Log In" button. You will be redirected to Next Identity to authenticate.
 
-```html
-<script>
-  document.addEventListener("DOMContentLoaded", async function() {
-    if (window.location.search.includes("code=")) {
-      try {
-        await client.handleRedirectCallback();
-        console.log("User authenticated successfully");
-      } catch (error) {
-        console.error("Error handling authentication redirect:", error);
-      }
-    }
-  });
-</script>
-```
+4.  **Authorize the application:** After successful authentication, you'll be redirected back to your application.
 
-### Fetch User Info
-Once authenticated, retrieve the user's information:
+5.  **View profile:** If authentication is successful, the user's profile information will be displayed.
 
-```html
-<button id="getUserButton">Get User Info</button>
-<pre id="userInfo"></pre>
+6.  **Log out:** Click the "Log Out" button to clear the session.
 
-<script>
-  document.getElementById('getUserButton').addEventListener('click', async () => {
-    try {
-      const userInfo = await client.getUserInfo();
-      document.getElementById('userInfo').textContent = JSON.stringify(userInfo, null, 2);
-    } catch (error) {
-      console.error("Error fetching user info:", error);
-    }
-  });
-</script>
-```
+## Important Notes
 
-### Logout
-To log the user out:
+*   **Security:** This example is for demonstration purposes.  In a production environment, you should implement more robust security measures, including validating the `state` parameter received from Next Identity during the callback and securely storing and managing access tokens.  Do not expose your client secret in the client-side code.
+*   **Callback Route:** The `redirectUri` in `config.js` *must* be registered in your Next Identity application settings.  This example assumes a simple setup. If you are using a more complex routing setup in your SPA, you'll need to adjust the callback handling accordingly.
+*   **Error Handling:** The current error handling is basic.  You should add more comprehensive error handling in a production application.
+*   **Next Identity Setup:** You will need to create an application in your Next Identity console and obtain the necessary credentials (client ID, issuer URL) before running this example.
 
-```html
-<button id="logoutButton">Logout</button>
+## Contributing
 
-<script>
-  document.getElementById('logoutButton').addEventListener('click', () => client.logout());
-</script>
-```
-
-## Example Full Implementation
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Next Identity SPA</title>
-    <script src="https://your-cdn-url.com/next-identity-client.js"></script>
-</head>
-<body>
-    <button id="loginButton">Login with Next Identity</button>
-    <button id="logoutButton" style="display: none;">Logout</button>
-    <button id="getUserButton" style="display: none;">Get User Info</button>
-    <pre id="userInfo"></pre>
-    
-    <script>
-      const client = new NextIdentityClient(NEXT_IDENTITY_CONFIG);
-
-      document.getElementById('loginButton').addEventListener('click', () => client.login());
-      document.getElementById('logoutButton').addEventListener('click', () => {
-        client.logout();
-        document.getElementById('logoutButton').style.display = 'none';
-        document.getElementById('getUserButton').style.display = 'none';
-      });
-
-      document.getElementById('getUserButton').addEventListener('click', async () => {
-        try {
-          const userInfo = await client.getUserInfo();
-          document.getElementById('userInfo').textContent = JSON.stringify(userInfo, null, 2);
-        } catch (error) {
-          console.error("Error fetching user info:", error);
-        }
-      });
-
-      document.addEventListener("DOMContentLoaded", async function() {
-        if (window.location.search.includes("code=")) {
-          try {
-            await client.handleRedirectCallback();
-            document.getElementById('logoutButton').style.display = 'inline-block';
-            document.getElementById('getUserButton').style.display = 'inline-block';
-          } catch (error) {
-            console.error("Error handling redirect:", error);
-          }
-        }
-      });
-    </script>
-</body>
-</html>
-```
-
-## Conclusion
-The Next Identity SPA SDK provides an easy way to integrate authentication into SPAs using OpenID Connect. Simply include the SDK, configure it, and use the provided methods to authenticate users, retrieve user information, and log out.
-
-For more details, visit [Next Identity Documentation](https://www.nextreason.com/products/next-identity).
-
+Contributions are welcome!  Please open an issue or submit a pull request.

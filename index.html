@@ -4,46 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Next Identity SPA</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/next-identity-client.js"></script>
+    <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
-    <img class="logo" src="images/primary-logo-white.png" alt="Next Identity Logo">
-    <button id="loginButton" class="login-button">Login with Next Identity</button>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", async function() {
-            const client = new NextIdentityClient(NEXT_IDENTITY_CONFIG);
-            
-            document.getElementById('loginButton').addEventListener('click', () => client.login());
-            document.getElementById('logoutButton').addEventListener('click', () => {
-                client.logout();
-                document.getElementById('logoutButton').style.display = 'none';
-                document.getElementById('getUserButton').style.display = 'none';
-            });
-
-            document.getElementById('getUserButton').addEventListener('click', async () => {
-                try {
-                    const userInfo = await client.getUserInfo();
-                    document.getElementById('userInfo').textContent = JSON.stringify(userInfo, null, 2);
-                } catch (error) {
-                    console.error("Error fetching user info:", error);
-                }
-            });
-
-            // Handle authentication response
-            if (window.location.search.includes("code=")) {
-                try {
-                    await client.handleRedirectCallback();
-                    document.getElementById('logoutButton').style.display = 'inline-block';
-                    document.getElementById('getUserButton').style.display = 'inline-block';
-                } catch (error) {
-                    console.error("Error handling redirect:", error);
-                }
-            }
-        });
-    </script>
-</body>
-</html>
+    <div id="app">
+        <h1>Welcome to Next Identity SPA</h1>
+        <button id="login-button">Log In</button>
+        <div id="profile-info" style="display: none;">
+            <h2>Profile</h2>
+            <pre id="profile-details"></pre>
+            <button id="logout-button">Log Out</button>
+        </div>
+    </div>
+    <script src="config.js"></script>
+    <script src="public/js/app.js"></script>
 </body>
 </html>
