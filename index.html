@@ -5,24 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Next Identity SPA</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="next-identity-client.js"></script>
+    <script src="js/next-identity-client.js"></script>
 </head>
 <body>
     <img class="logo" src="images/primary-logo-white.png" alt="Next Identity Logo">
     <button id="loginButton" class="login-button">Login with Next Identity</button>
     
     <script>
-        window.NEXT_IDENTITY_CONFIG = {
-            clientId: "your-client-id",
-            issuer: "https://next-identity.com",
-            redirectUri: window.location.origin
-        };
+        document.addEventListener("DOMContentLoaded", async function() {
+            const client = new NextIdentityClient(NEXT_IDENTITY_CONFIG);
+            
+            document.getElementById('loginButton').addEventListener('click', () => client.login());
+            document.getElementById('logoutButton').addEventListener('click', () => {
+                client.logout();
+                document.getElementById('logoutButton').style.display = 'none';
+                document.getElementById('getUserButton').style.display = 'none';
+            });
 
-        const client = new NextIdentityClient(window.NEXT_IDENTITY_CONFIG);
+            document.getElementById('getUserButton').addEventListener('click', async () => {
+                try {
+                    const userInfo = await client.getUserInfo();
+                    document.getElementById('userInfo').textContent = JSON.stringify(userInfo, null, 2);
+                } catch (error) {
+                    console.error("Error fetching user info:", error);
+                }
+            });
 
-        document.getElementById('loginButton').addEventListener('click', () => {
-            client.login();
+            // Handle authentication response
+            if (window.location.search.includes("code=")) {
+                try {
+                    await client.handleRedirectCallback();
+                    document.getElementById('logoutButton').style.display = 'inline-block';
+                    document.getElementById('getUserButton').style.display = 'inline-block';
+                } catch (error) {
+                    console.error("Error handling redirect:", error);
+                }
+            }
         });
     </script>
+</body>
+</html>
 </body>
 </html>

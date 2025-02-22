@@ -1,7 +1,7 @@
 const NEXT_IDENTITY_CONFIG = {
-  clientId: "your-client-id",
-  issuer: "your-next-identity-issuer",
-  redirectUri: window.location.origin,
+  clientId: "next-identity-client-here",
+  issuer: "next-identity-issuer-url-here",
+  redirectUri: "redirect-uri-here",
 };
 
 class NextIdentityClient {
@@ -16,10 +16,11 @@ class NextIdentityClient {
     this.userInfoEndpoint = `${issuer}/userinfo`;
   }
 
-  login() {
+  async login() {
     const state = this._generateRandomString();
     const codeVerifier = this._generateRandomString();
-    const codeChallenge = this._base64UrlEncode(this._sha256(codeVerifier));
+    const hashed = await this._sha256(codeVerifier);
+    const codeChallenge = this._base64UrlEncode(hashed);
     
     this.storage.setItem("next_identity_state", state);
     this.storage.setItem("next_identity_code_verifier", codeVerifier);
@@ -100,7 +101,7 @@ class NextIdentityClient {
   }
 
   _base64UrlEncode(arrayBuffer) {
-    return btoa(String.fromCharCode(...arrayBuffer))
+    return btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))
       .replace(/\+/g, "-")
       .replace(/\//g, "_")
       .replace(/=+$/, "");
