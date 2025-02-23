@@ -95,8 +95,7 @@ module.exports = \{\
 ## 5. Start Your Local Server
 
 ```sh
-npm install -g serve
-serve -s .
+npx serve -s . -l 3000 --ssl-cert localhost.pem --ssl-key localhost-key.pem
 ```
 
 Now your app will be accessible via `https://localhost:3000/`.

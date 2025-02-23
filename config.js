@@ -5,3 +5,5 @@ const config = {
     redirectUri: window.location.origin + '/callback', // Important: Add a callback route
     scopes: ['openid', 'profile', 'email'], // Add the scopes you need
 };
+
+
