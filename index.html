@@ -3,89 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Next Identity SPA Demo</title>
-    <link rel="stylesheet" href="public/css/style.css">
+    <title>Next Identity Simple Login</title>
+    <script src="https://cdn.jsdelivr.net/gh/next-reason/ni-js-oidc@latest/next-identity-client.js"></script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Next Identity SPA Demo</h1>
-            <nav>
-                <ul>
-                    <li><a href="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME">View on GitHub</a></li>
-                    <li><button id="login-button">Log In</button></li> 
-                </ul>
-            </nav>
-        </div>
-    </header>
-
     <main>
         <section class="hero">
             <div class="container">
-                <h2>Build Secure SPAs with Next Identity</h2>
-                <p>This demo shows you how to easily integrate Next Identity into your single-page applications for secure authentication.</p>
+                <h2>Simple and Secure Authentication with Next Identity</h2>
+                <p>This demo shows you how to easily integrate Next Identity into your single-page applications.</p>
+                <button id="login-button">Log In</button>
+                <button id="logout-button">Log Out</button>
             </div>
         </section>
 
         <section class="instructions">
             <div class="container">
-                <h2>Instructions</h2>
-                <ol>
-                    <li><b>Clone the repository:</b> 
-                        <pre><code>git clone https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git</code></pre>
-                    </li>
-                    <li><b>Install dependencies:</b>
-                        <pre><code>npm install</code></pre>
-                    </li>
-                    <li><b>Configure your Next Identity credentials:</b>
-                        <ul>
-                            <li>Open <code>config.js</code></li>
-                            <li>Replace the placeholder values with your actual client ID, issuer URL, and redirect URI.</li>
-                        </ul>
-                    </li>
-                    <li><b>Start the development server:</b>
-                        <pre><code>serve -s.</code></pre>
-                    </li>
-                    <li><b>Open the app in your browser:</b> Usually at <a href="http://localhost:5000">http://localhost:5000</a></li>
-                    <li><b>Click "Log In" to authenticate with Next Identity.</b></li>
-                </ol>
-            </div>
-        </section>
-
-        <section class="code-example">
-            <div class="container">
-                <h2>Code Example (Authorization)</h2>
-                <pre><code>// app.js
-const nextIdentity = {
-  authorize: () => {
-    //... (code to build authorization URL with PKCE)
-    window.location.href = authUrl.toString();
-  },
-  //... other functions
-};
-
-loginButton.addEventListener('click', () => {
-  nextIdentity.authorize();
-});
-                </code></pre>
+                <p>See the <a href="https://github.com/next-reason/ni-spa-js" target="_blank">source code</a></p>
+                <p>Read the <a href="https://next-identity-multi-cloud.readme.io/docs/javascript-spa-sdk#/" target="_blank">documentation</a></p>
             </div>
         </section>
 
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2023 Next Identity SPA Demo</p>
-        </div>
-    </footer>
-
     <div id="profile-info" style="display: none;">
-        <h2>Profile</h2>
+        <h2>User Profile</h2>
         <pre id="profile-details"></pre>
-        <button id="logout-button">Log Out</button>
     </div>
 
     <script src="config.js"></script>
-    <script src="public/js/app.js"></script>
+
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Next Identity</p>
+        </div>
+    </footer>
 </body>
 </html>
