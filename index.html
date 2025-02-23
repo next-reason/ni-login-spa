@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Next Identity Simple Login</title>
-    <script src="https://cdn.jsdelivr.net/gh/next-reason/ni-js-sdk@latest/next-identity-client.js"></script>
+    <script src="next-identity-client.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/gh/next-reason/ni-js-sdk@latest/next-identity-client.js"></script>-->
 </head>
 <body>
     <main>
@@ -13,7 +14,6 @@
                 <h2>Simple and Secure Authentication with Next Identity</h2>
                 <p>This demo shows you how to easily integrate Next Identity into your single-page applications.</p>
                 <button id="login-button">Log In</button>
-                <button id="logout-button" style="display: none;">Log Out</button>
             </div>
         </section>
 
@@ -29,6 +29,7 @@
     <div id="profile-info" style="display: none;">
         <h2>User Profile</h2>
         <pre id="profile-details"></pre>
+        <button id="logout-button">Log Out</button>
     </div>
 
     <script src="config.js"></script>
