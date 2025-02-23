@@ -17,11 +17,11 @@ This repository contains a simple Single Page Application (SPA) example demonstr
 1.  **Clone the repository:**
 
     ```bash
-    git clone [https://github.com/next-reason/ni-spa-js.git]
-    cd YOUR_REPO_NAME
+    git clone [https://github.com/next-reason/ni-local-spa.git]
+    cd ni-local-spa
     ```
 
-2.  **Install `serve` globally (if you don't have it already):**
+1.  **Install `serve` globally (if you don't have it already):**
 
     ```bash
     npm install -g serve
@@ -53,7 +53,7 @@ This repository contains a simple Single Page Application (SPA) example demonstr
     serve -s .
     ```
 
-2.  **Open the application in your browser:**  `serve` will provide you with a URL (usually `http://localhost:5000`).
+2.  **Open the application in your browser:**  `serve` will provide you with a URL (usually something like `http://localhost:5000`).
 
 3.  **Log in:** Click the "Log In" button. You will be redirected to Next Identity to authenticate.
 
