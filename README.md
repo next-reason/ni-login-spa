@@ -81,14 +81,14 @@ If you are using a more advanced dev server like Webpack Dev Server, you'll need
 
 ```javascript
 module.exports = \{\
-		// ... other config\
-		devServer: \{
-		https: \{
-			key: './localhost-key.pem',
-			cert: './localhost.pem',
-		},
-		port: 3000,
-	},
+// ... other config\
+devServer: \{
+https: \{
+key: './localhost-key.pem',
+cert: './localhost.pem',
+},
+port: 3000,
+},
 };
 ```
 
