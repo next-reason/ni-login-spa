@@ -32,7 +32,7 @@ const config = {
 By default, the project uses the OpenID Connect SDK from the CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/next-reason/ni-js-sdk@latest/next-identity-client.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/next-reason/ni-js-sdk/next-identity-client.js"></script>
 ```
 
 If you need to customize the SDK, clone the repository and use your local version:
