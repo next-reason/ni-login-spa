@@ -6,8 +6,8 @@ You will clone a pre-built project, configure your details, and run it locally w
 
 **Pre-requisites:** 
 - Have a Next Identity client id and issuer URL by configuring a user journey in the admin console.
-- Install mkcert (with Homebrew you can use brew install mkcert)
-- Install Node (with Homebrew you can use brew install node)
+- Install mkcert (with Homebrew you can use ```brew install mkcert```)
+- Install Node (with Homebrew you can use ```brew install node```)
 
 ## 1. Clone the Project
 
