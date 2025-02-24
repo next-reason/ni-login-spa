@@ -1,6 +1,8 @@
 # Getting Started with Next Identity Login
 
-This guide walks you through quickly getting secure login with Next Identity working with a simple local HTML app. You will clone a pre-built project, configure your details, and run it locally with HTTPS.
+Quick start guide for getting authentication running in a Single Page Applications (SPA) using OIDC + PKCE using Next Identity. 
+
+You will clone a pre-built project, configure your details, and run it locally with HTTPS. 
 
 ***Pre-requisite:** you need a Next Identity client id and issuer URL by configuring a user journey in the admin console.*
 
